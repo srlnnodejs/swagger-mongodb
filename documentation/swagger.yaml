@@ -1,0 +1,568 @@
+swagger: "2.0"
+info:
+  description: "This is API documentation by Sergei Revenko for racing info service"
+  version: "1.0.0"
+  title: "Racing info service"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "23happyami@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/"
+tags:
+
+- name: "users"
+  description: "Operations about users"
+  
+- name: "leagues"
+  description: "Operations about leagues"
+  
+- name: "stages"
+  description: "Operations about stages"
+
+- name: "races"
+  description: "Operations about leagues"
+
+schemes:
+- "http"
+paths:
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "Get a list of all users"
+      description: "This endpoint uses get request to show all users"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Succesful operation"
+ 
+    post:
+      tags:
+        - "users"
+      summary: "Create new user"
+      description: "This endpoint uses post request to create  user"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        201:
+          description: "Succesful operation"
+        
+  /users/{id}:
+    get:
+      tags:
+      - "users"
+      summary: "View a user"
+      description: "This endpoint uses get request to dislay  user details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of user"
+        required: true
+  
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"
+    put:
+      tags:
+      - "users"
+      summary: "Update user"
+      description: "This endpoint uses put request to uptate  user details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of user"
+        required: true
+        
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+          
+      responses:
+        200:
+          description: "Succesful operation"
+    
+    delete:
+      tags:
+      - "users"
+      summary: "Delete user"
+      description: "This endpoint uses delete request to delete user"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of user"
+        required: true
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"  
+          
+  /users/{id}/races:
+    get:
+      tags:
+      - "users"
+      summary: "View a user with all his races"
+      description: "This endpoint uses get request to view a user profile and his races"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of user"
+        required: true
+      
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"  
+  
+  /users/{id}/leagues:
+    get:
+      tags:
+      - "users"
+      summary: "View a user with all his leagues"
+      description: "This endpoint uses get request to view a user profile and leagues where he took part"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of user"
+        required: true
+      
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"    
+  
+  /leagues:
+    get:
+      tags:
+      - "leagues"
+      summary: "Get a list of all leagues"
+      description: "This endpoint uses get request to show all leagues"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Succesful operation"
+    post:
+      tags:
+        - "leagues"
+      summary: "Create new league"
+      description: "This endpoint uses post request to create  new league"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created league object"
+          required: true
+          schema:
+            $ref: "#/definitions/League"
+      responses:
+        201:
+          description: "Succesful operation"
+          
+  /leagues/{id}:
+    get:
+      tags:
+      - "leagues"
+      summary: "View a league"
+      description: "This endpoint uses get request to dislay  league details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of the league"
+        required: true
+  
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "League not found"
+          
+    put:
+      tags:
+      - "leagues"
+      summary: "Update league"
+      description: "This endpoint uses put request to uptate  league details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of league"
+        required: true
+        
+      - in: "body"
+        name: "body"
+        description: "Updated league object"
+        required: true
+        schema:
+          $ref: "#/definitions/League"
+          
+      responses:
+        200:
+          description: "Succesful operation"
+          
+    delete:
+      tags:
+      - "leagues"
+      summary: "Delete league"
+      description: "This endpoint uses delete request to delete league"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of league"
+        required: true
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "League not found"  
+          
+    post:
+      tags:
+        - "leagues"
+      summary: "Append user to league"
+      description: "This endpoint uses post request to append user to the league"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of league"
+        required: true
+        
+      - in: "body"
+        name: "body"
+        description: "Updated league object. You need to enter id of the user which you want to append"
+        required: true
+        schema:
+          $ref: "#/definitions/LeagueAppendUser"
+        
+      responses:
+        201:
+          description: "Succesful operation"
+  
+  /stages:
+    get:
+      tags:
+      - "stages"
+      summary: "Get a list of all stages"
+      description: "This endpoint uses get request to show all stages of all leagues"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Succesful operation"
+ 
+    post:
+      tags:
+        - "stages"
+      summary: "Create new stage for the league"
+      description: "This endpoint uses post request to create new stage"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created stage object"
+          required: true
+          schema:
+            $ref: "#/definitions/Stage"
+      responses:
+        201:
+          description: "Succesful operation"
+  
+  /stages/{id}:
+    get:
+      tags:
+      - "stages"
+      summary: "View a stage"
+      description: "This endpoint uses get request to dislay stage details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of the stage"
+        required: true
+  
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "League not found"
+          
+    put:
+      tags:
+      - "stages"
+      summary: "Update stage"
+      description: "This endpoint uses put request to uptate  stage details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of stage"
+        required: true
+        
+      - in: "body"
+        name: "body"
+        description: "Updated stage object"
+        required: true
+        schema:
+          $ref: "#/definitions/Stage"
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        404:
+          description: "Stage not found" 
+          
+    delete:
+      tags:
+      - "stages"
+      summary: "Delete stage"
+      description: "This endpoint uses delete request to delete stage from league"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of the stage"
+        required: true
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+          
+  /stages/{id}/races:
+    get:
+      tags:
+      - "stages"
+      summary: "View stage with all it's races"
+      description: "This endpoint uses get request to view a stage and all races in this stage"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of stage"
+        required: true
+      
+      responses:
+        200:
+          description: "Succesful operation"
+        404:
+          description: "Stage not found"    
+          
+  /races:
+    get:
+      tags:
+      - "races"
+      summary: "Get a list of all races"
+      description: "This endpoint uses get request to show all races in all stages"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Succesful operation"
+ 
+    post:
+      tags:
+        - "races"
+      summary: "Create new race"
+      description: "This endpoint uses post request to create new race"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created race object"
+          required: true
+          schema:
+            $ref: "#/definitions/Race"
+      responses:
+        201:
+          description: "Succesful operation"
+          
+  /races/{id}:
+    get:
+      tags:
+      - "races"
+      summary: "View a race"
+      description: "This endpoint uses get request to dislay race details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of the race"
+        required: true
+  
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "League not found"
+          
+    put:
+      tags:
+      - "races"
+      summary: "Update race"
+      description: "This endpoint uses put request to uptate  race details"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of race"
+        required: true
+        
+      - in: "body"
+        name: "body"
+        description: "Updated race object"
+        required: true
+        schema:
+          $ref: "#/definitions/Race"
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        404:
+          description: "Stage not found" 
+          
+    delete:
+      tags:
+      - "races"
+      summary: "Delete race"
+      description: "This endpoint uses delete request to delete race from stage"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "string"
+        description: "This is a unique identifier of the race"
+        required: true
+          
+      responses:
+        200:
+          description: "Succesful operation"
+        400:
+          description: "Invalid ID supplied"
+          
+          
+definitions:
+  
+  User:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      nickname:
+        type: "string"
+        
+  League:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+        
+  LeagueAppendUser:
+    type: "object"
+    properties:
+      userId:
+        type: "string"
+
+  Stage:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      league:
+        type: "string"
+        
+  Race:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      time:
+        type: "string"
+      stage:
+        type: "string"
+      user:
+        type: "string"
