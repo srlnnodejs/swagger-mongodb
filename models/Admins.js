@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const Shema = mongoose.Schema;
-
-
-const AdminSchema = new Shema({
+const Schema = mongoose.Schema;
+const AdminSchema = new Schema({
 
     name: {
         type: String,
@@ -15,12 +13,8 @@ const AdminSchema = new Shema({
     address:{
         type:String,
         required:true
-    },
-    phoneno:{
-        type:Number,
-        required:true
     }
     
 });
 
-module.exports = mongoose.model('admin', AdminSchema)
+module.exports = mongoose.model('admins', AdminSchema)

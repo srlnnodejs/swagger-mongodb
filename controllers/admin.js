@@ -1,4 +1,4 @@
-const Admins = require('../models/Admin');
+const Admins = require('../models/Admins');
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
@@ -14,8 +14,9 @@ class Controller {
 
     async addAdmin(req, res) {
         const Admin = new Admins({
-            title: req.body.title,
-            description: req.body.description
+            name: req.body.name,
+            phoneno: req.body.phoneno,
+            address:req.body.address
         })
         await Admin.save()
         res.status(201).send(Admin)
@@ -23,11 +24,14 @@ class Controller {
 
     async updateAdmin(req, res) {
         const updQuery = {};
-        if(req.body.title) {
-            updQuery.title = req.body.title
+        if(req.body.name) {
+            updQuery.name = req.body.name
         }
-        if(req.body.description) {
-            updQuery.description = req.body.description
+        if(req.body.phoneno) {
+            updQuery.phoneno = req.body.phoneno
+        }
+        if(req.body.address) {
+            updQuery.address = req.body.address
         }
         const updateAdmin = await Admins.findOneAndUpdate(
             {_id: req.params.id}, 
@@ -38,7 +42,7 @@ class Controller {
     }
 
     async deleteAdmin(req, res) {
-        const deletedAdmin = await Leagues.deleteOne({
+        const deletedAdmin = await Admins.deleteOne({
             _id: req.params.id
         })
         res.status(200).send(deletedAdmin)

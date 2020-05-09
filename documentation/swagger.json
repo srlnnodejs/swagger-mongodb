@@ -33,15 +33,149 @@
       "description": "Operations about leagues"
     },
     {
-      "name": "admins",
-      "description": "Operations about administartor"
+      "name": "admin",
+      "description": "Operations for administartor"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/users": {
+      "/admins":{
+          "get":{
+            "tags":["admins"],
+            "summary":"get all of the administrators",
+            "description":"this is the endpoints for getting all of the administrators",
+            "porduces":["application/json"],
+            "responses":{
+              "200":{
+                "description":"sucessfull operation"
+              }
+      }},
+      "post": {
+        "tags": ["admins"],
+        "summary": "Create new administrator",
+        "description": "This endpoint uses post request to create  new administrator",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Admin"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Succesful operation"
+          }
+        }
+      }},
+
+      
+      "/admins/{id}": {
+        "get": {
+          "tags": [
+            "admins"
+          ],
+          "summary": "View a  single administrator",
+          "description": "This endpoint uses get request to display single administartor details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "type": "string",
+              "description": "This is a unique identifier of user",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Succesful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "admins"
+          ],
+          "summary": "Update user",
+          "description": "This endpoint uses put request to uptate  user details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "type": "string",
+              "description": "This is a unique identifier of administrator",
+              "required": true
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated user object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Admin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Succesful operation"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "admins"
+          ],
+          "summary": "Delete administrator",
+          "description": "This endpoint uses delete request to delete single administrator",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "type": "string",
+              "description": "This is a unique identifier of administrator",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Succesful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      },
+
+
+
+
+  "/users": {
       "get": {
         "tags": [
           "users"
@@ -784,6 +918,14 @@
           "type": "string"
         }
       }
+    },
+    "Admin":{
+      "type":"object",
+      "properties":{
+          "name":{"type":"string"},
+          "phoneno":{"type":"number"},
+          "address":{"type":"string"}
+
     }
-  }
+  }}
 }
