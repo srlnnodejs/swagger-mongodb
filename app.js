@@ -9,7 +9,8 @@ const userRoutes = require('./routes/user-routes')
 const leagueRoutes = require('./routes/league-routes')
 const stageRoutes = require('./routes/stage-routes')
 const raceRoutes = require('./routes/race-routes')
-
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./documentation/swagger.json');
 mongoose.connect(
     url,
     { useUnifiedTopology: true, 
@@ -25,6 +26,7 @@ app.use('/users', userRoutes);
 app.use('/leagues', leagueRoutes);
 app.use('/stages', stageRoutes);
 app.use('/races', raceRoutes);
-
+app.use('/admin',adminRoutes)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
 app.listen(3000, () => console.log(`Server is running on port ${port} ...`))
