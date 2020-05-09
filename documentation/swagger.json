@@ -31,6 +31,10 @@
     {
       "name": "races",
       "description": "Operations about leagues"
+    },
+    {
+      "name": "admins",
+      "description": "Operations about administartor"
     }
   ],
   "schemes": [
